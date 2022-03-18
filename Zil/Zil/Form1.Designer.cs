@@ -32,7 +32,6 @@ namespace Zil
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.z1Button = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.z1TextBox = new System.Windows.Forms.TextBox();
             this.z2TextBox = new System.Windows.Forms.TextBox();
             this.imTextBox = new System.Windows.Forms.TextBox();
             this.z2oButton = new System.Windows.Forms.Button();
@@ -51,6 +50,7 @@ namespace Zil
             this.z2Button = new System.Windows.Forms.Button();
             this.zsButton = new System.Windows.Forms.Button();
             this.startButton = new System.Windows.Forms.Button();
+            this.z1TextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -75,14 +75,6 @@ namespace Zil
             this.button2.TabIndex = 1;
             this.button2.Text = "Öğretmen Zili Dosyası";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // z1TextBox
-            // 
-            this.z1TextBox.Location = new System.Drawing.Point(9, 17);
-            this.z1TextBox.Name = "z1TextBox";
-            this.z1TextBox.Size = new System.Drawing.Size(318, 23);
-            this.z1TextBox.TabIndex = 2;
-            this.z1TextBox.TextChanged += new System.EventHandler(this.z1TextBox_TextChanged);
             // 
             // z2TextBox
             // 
@@ -226,6 +218,7 @@ namespace Zil
             this.z2Button.TabIndex = 22;
             this.z2Button.Text = "Öğretmen Zili Dosyası";
             this.z2Button.UseVisualStyleBackColor = true;
+            this.z2Button.Click += new System.EventHandler(this.z2Button_Click);
             // 
             // zsButton
             // 
@@ -246,11 +239,19 @@ namespace Zil
             this.startButton.Text = "Çalıştır";
             this.startButton.UseVisualStyleBackColor = true;
             // 
+            // z1TextBox
+            // 
+            this.z1TextBox.Location = new System.Drawing.Point(9, 17);
+            this.z1TextBox.Name = "z1TextBox";
+            this.z1TextBox.Size = new System.Drawing.Size(318, 23);
+            this.z1TextBox.TabIndex = 25;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(925, 574);
+            this.Controls.Add(this.z1TextBox);
             this.Controls.Add(this.startButton);
             this.Controls.Add(this.zsButton);
             this.Controls.Add(this.z2Button);
@@ -269,7 +270,6 @@ namespace Zil
             this.Controls.Add(this.z2oButton);
             this.Controls.Add(this.imTextBox);
             this.Controls.Add(this.z2TextBox);
-            this.Controls.Add(this.z1TextBox);
             this.Controls.Add(this.z1Button);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -284,7 +284,6 @@ namespace Zil
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button z1Button;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox z1TextBox;
         private System.Windows.Forms.TextBox z2TextBox;
         private System.Windows.Forms.TextBox imTextBox;
         private System.Windows.Forms.Button z2oButton;
@@ -303,6 +302,7 @@ namespace Zil
         private System.Windows.Forms.Button z2Button;
         private System.Windows.Forms.Button zsButton;
         private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.TextBox z1TextBox;
     }
 }
 
