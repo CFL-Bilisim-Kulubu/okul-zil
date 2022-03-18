@@ -36,28 +36,31 @@ namespace Zil
         {
             im = openFile(imTextBox, "İstiklal Marşı Dosyası");
         }
-
+        private void imoButton_Click(object sender, EventArgs e)
+        {
+            if (im == "" || im == null)
+                return;
+            mpPlayer = new mp3Player(im);
+            mpPlayer.Play();
+        }
+        private void z2oButton_Click(object sender, EventArgs e)
+        {
+            if (z2 == "" || z2 == null)
+                return;
+            mpPlayer = new mp3Player(z2);
+            mpPlayer.Play();
+        }
+        private void z1oButton_Click(object sender, EventArgs e)
+        {
+            if (z1 == "" || z1 == null)
+                return;
+            mpPlayer = new mp3Player(z1);
+            mpPlayer.Play();
+        }
         private void ZilSaatleriGuncellemeButton_Click(object sender, EventArgs e)
         {
 
         }
-
-        private void imoButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void z2oButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void z1oButton_Click(object sender, EventArgs e)
-        {
-            mpPlayer = new mp3Player(z1);
-            mpPlayer.Play();
-        }
-
         private void zsButton_Click(object sender, EventArgs e)
         {
 

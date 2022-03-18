@@ -78,15 +78,19 @@ namespace Zil
             // 
             // z2TextBox
             // 
+            this.z2TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.z2TextBox.Location = new System.Drawing.Point(9, 69);
             this.z2TextBox.Name = "z2TextBox";
+            this.z2TextBox.ReadOnly = true;
             this.z2TextBox.Size = new System.Drawing.Size(318, 23);
             this.z2TextBox.TabIndex = 3;
             // 
             // imTextBox
             // 
+            this.imTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.imTextBox.Location = new System.Drawing.Point(9, 120);
             this.imTextBox.Name = "imTextBox";
+            this.imTextBox.ReadOnly = true;
             this.imTextBox.Size = new System.Drawing.Size(318, 23);
             this.imTextBox.TabIndex = 5;
             // 
@@ -122,8 +126,10 @@ namespace Zil
             // 
             // zsTextBox
             // 
+            this.zsTextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.zsTextBox.Location = new System.Drawing.Point(9, 170);
             this.zsTextBox.Name = "zsTextBox";
+            this.zsTextBox.ReadOnly = true;
             this.zsTextBox.Size = new System.Drawing.Size(318, 23);
             this.zsTextBox.TabIndex = 11;
             // 
@@ -241,8 +247,10 @@ namespace Zil
             // 
             // z1TextBox
             // 
+            this.z1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.z1TextBox.Location = new System.Drawing.Point(9, 17);
             this.z1TextBox.Name = "z1TextBox";
+            this.z1TextBox.ReadOnly = true;
             this.z1TextBox.Size = new System.Drawing.Size(318, 23);
             this.z1TextBox.TabIndex = 25;
             // 
