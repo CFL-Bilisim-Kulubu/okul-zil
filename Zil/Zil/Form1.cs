@@ -17,17 +17,61 @@ namespace Zil
             InitializeComponent();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void z1Button_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void imButton_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void ZilSaatleriGuncellemeButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imoButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void z2oButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void z1oButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void zsButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void z1TextBox_TextChanged(object sender, EventArgs e)
         {
 
         }

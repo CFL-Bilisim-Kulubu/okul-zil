@@ -30,32 +30,42 @@ namespace Zil
         private void InitializeComponent()
         {
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.z1Button = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button8 = new System.Windows.Forms.Button();
+            this.z1TextBox = new System.Windows.Forms.TextBox();
+            this.z2TextBox = new System.Windows.Forms.TextBox();
+            this.imTextBox = new System.Windows.Forms.TextBox();
+            this.z2oButton = new System.Windows.Forms.Button();
+            this.imoButton = new System.Windows.Forms.Button();
+            this.imButton = new System.Windows.Forms.Button();
+            this.zsTextBox = new System.Windows.Forms.TextBox();
+            this.PZT = new System.Windows.Forms.ListBox();
+            this.SAL = new System.Windows.Forms.ListBox();
+            this.CAR = new System.Windows.Forms.ListBox();
+            this.CMT = new System.Windows.Forms.ListBox();
+            this.CUM = new System.Windows.Forms.ListBox();
+            this.PER = new System.Windows.Forms.ListBox();
+            this.PZR = new System.Windows.Forms.ListBox();
+            this.ZilSaatleriGuncellemeButton = new System.Windows.Forms.Button();
+            this.z1oButton = new System.Windows.Forms.Button();
+            this.z2Button = new System.Windows.Forms.Button();
+            this.zsButton = new System.Windows.Forms.Button();
+            this.startButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // button1
+            // z1Button
             // 
-            this.button1.Location = new System.Drawing.Point(338, 17);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(138, 44);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Zil Dosyası";
-            this.button1.UseVisualStyleBackColor = true;
+            this.z1Button.Location = new System.Drawing.Point(333, 17);
+            this.z1Button.Name = "z1Button";
+            this.z1Button.Size = new System.Drawing.Size(156, 44);
+            this.z1Button.TabIndex = 0;
+            this.z1Button.Text = "Zil Dosyası";
+            this.z1Button.UseVisualStyleBackColor = true;
+            this.z1Button.Click += new System.EventHandler(this.z1Button_Click);
             // 
             // button2
             // 
@@ -66,109 +76,204 @@ namespace Zil
             this.button2.Text = "Öğretmen Zili Dosyası";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // z1TextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(9, 17);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(323, 23);
-            this.textBox1.TabIndex = 2;
+            this.z1TextBox.Location = new System.Drawing.Point(9, 17);
+            this.z1TextBox.Name = "z1TextBox";
+            this.z1TextBox.Size = new System.Drawing.Size(318, 23);
+            this.z1TextBox.TabIndex = 2;
+            this.z1TextBox.TextChanged += new System.EventHandler(this.z1TextBox_TextChanged);
             // 
-            // textBox2
+            // z2TextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(9, 69);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(323, 23);
-            this.textBox2.TabIndex = 3;
+            this.z2TextBox.Location = new System.Drawing.Point(9, 69);
+            this.z2TextBox.Name = "z2TextBox";
+            this.z2TextBox.Size = new System.Drawing.Size(318, 23);
+            this.z2TextBox.TabIndex = 3;
             // 
-            // textBox3
+            // imTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(9, 120);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(323, 23);
-            this.textBox3.TabIndex = 5;
+            this.imTextBox.Location = new System.Drawing.Point(9, 120);
+            this.imTextBox.Name = "imTextBox";
+            this.imTextBox.Size = new System.Drawing.Size(318, 23);
+            this.imTextBox.TabIndex = 5;
             // 
-            // button5
+            // z2oButton
             // 
-            this.button5.Location = new System.Drawing.Point(482, 17);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(70, 44);
-            this.button5.TabIndex = 6;
-            this.button5.Text = "Oynat";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.z2oButton.Location = new System.Drawing.Point(495, 69);
+            this.z2oButton.Name = "z2oButton";
+            this.z2oButton.Size = new System.Drawing.Size(75, 44);
+            this.z2oButton.TabIndex = 7;
+            this.z2oButton.Text = "Oynat";
+            this.z2oButton.UseVisualStyleBackColor = true;
+            this.z2oButton.Click += new System.EventHandler(this.z2oButton_Click);
             // 
-            // button6
+            // imoButton
             // 
-            this.button6.Location = new System.Drawing.Point(482, 69);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(70, 44);
-            this.button6.TabIndex = 7;
-            this.button6.Text = "Oynat";
-            this.button6.UseVisualStyleBackColor = true;
+            this.imoButton.Location = new System.Drawing.Point(495, 120);
+            this.imoButton.Name = "imoButton";
+            this.imoButton.Size = new System.Drawing.Size(75, 44);
+            this.imoButton.TabIndex = 8;
+            this.imoButton.Text = "Oynat";
+            this.imoButton.UseVisualStyleBackColor = true;
+            this.imoButton.Click += new System.EventHandler(this.imoButton_Click);
             // 
-            // button7
+            // imButton
             // 
-            this.button7.Location = new System.Drawing.Point(482, 120);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(70, 44);
-            this.button7.TabIndex = 8;
-            this.button7.Text = "Oynat";
-            this.button7.UseVisualStyleBackColor = true;
+            this.imButton.Location = new System.Drawing.Point(333, 120);
+            this.imButton.Name = "imButton";
+            this.imButton.Size = new System.Drawing.Size(156, 44);
+            this.imButton.TabIndex = 10;
+            this.imButton.Text = "İstiklal Marşı Dosyası";
+            this.imButton.UseVisualStyleBackColor = true;
+            this.imButton.Click += new System.EventHandler(this.imButton_Click);
             // 
-            // button3
+            // zsTextBox
             // 
-            this.button3.Location = new System.Drawing.Point(338, 69);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(138, 44);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Öğretmen Zili Dosyası";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.zsTextBox.Location = new System.Drawing.Point(9, 170);
+            this.zsTextBox.Name = "zsTextBox";
+            this.zsTextBox.Size = new System.Drawing.Size(318, 23);
+            this.zsTextBox.TabIndex = 11;
             // 
-            // button4
+            // PZT
             // 
-            this.button4.Location = new System.Drawing.Point(338, 120);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(138, 44);
-            this.button4.TabIndex = 10;
-            this.button4.Text = "İstiklal Marşı Dosyası";
-            this.button4.UseVisualStyleBackColor = true;
+            this.PZT.FormattingEnabled = true;
+            this.PZT.ItemHeight = 15;
+            this.PZT.Location = new System.Drawing.Point(9, 228);
+            this.PZT.Name = "PZT";
+            this.PZT.Size = new System.Drawing.Size(75, 334);
+            this.PZT.TabIndex = 13;
             // 
-            // textBox4
+            // SAL
             // 
-            this.textBox4.Location = new System.Drawing.Point(9, 170);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(323, 23);
-            this.textBox4.TabIndex = 11;
+            this.SAL.FormattingEnabled = true;
+            this.SAL.ItemHeight = 15;
+            this.SAL.Location = new System.Drawing.Point(90, 228);
+            this.SAL.Name = "SAL";
+            this.SAL.Size = new System.Drawing.Size(75, 334);
+            this.SAL.TabIndex = 14;
             // 
-            // button8
+            // CAR
             // 
-            this.button8.Location = new System.Drawing.Point(338, 170);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(138, 44);
-            this.button8.TabIndex = 12;
-            this.button8.Text = "Zil Saatleri Dosyası";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.CAR.FormattingEnabled = true;
+            this.CAR.ItemHeight = 15;
+            this.CAR.Location = new System.Drawing.Point(171, 228);
+            this.CAR.Name = "CAR";
+            this.CAR.Size = new System.Drawing.Size(75, 334);
+            this.CAR.TabIndex = 15;
+            // 
+            // CMT
+            // 
+            this.CMT.FormattingEnabled = true;
+            this.CMT.ItemHeight = 15;
+            this.CMT.Location = new System.Drawing.Point(414, 228);
+            this.CMT.Name = "CMT";
+            this.CMT.Size = new System.Drawing.Size(75, 334);
+            this.CMT.TabIndex = 18;
+            // 
+            // CUM
+            // 
+            this.CUM.FormattingEnabled = true;
+            this.CUM.ItemHeight = 15;
+            this.CUM.Location = new System.Drawing.Point(333, 228);
+            this.CUM.Name = "CUM";
+            this.CUM.Size = new System.Drawing.Size(75, 334);
+            this.CUM.TabIndex = 17;
+            // 
+            // PER
+            // 
+            this.PER.FormattingEnabled = true;
+            this.PER.ItemHeight = 15;
+            this.PER.Location = new System.Drawing.Point(252, 228);
+            this.PER.Name = "PER";
+            this.PER.Size = new System.Drawing.Size(75, 334);
+            this.PER.TabIndex = 16;
+            // 
+            // PZR
+            // 
+            this.PZR.FormattingEnabled = true;
+            this.PZR.ItemHeight = 15;
+            this.PZR.Location = new System.Drawing.Point(495, 228);
+            this.PZR.Name = "PZR";
+            this.PZR.Size = new System.Drawing.Size(75, 334);
+            this.PZR.TabIndex = 19;
+            // 
+            // ZilSaatleriGuncellemeButton
+            // 
+            this.ZilSaatleriGuncellemeButton.Location = new System.Drawing.Point(495, 170);
+            this.ZilSaatleriGuncellemeButton.Name = "ZilSaatleriGuncellemeButton";
+            this.ZilSaatleriGuncellemeButton.Size = new System.Drawing.Size(75, 44);
+            this.ZilSaatleriGuncellemeButton.TabIndex = 20;
+            this.ZilSaatleriGuncellemeButton.Text = "Güncelle";
+            this.ZilSaatleriGuncellemeButton.UseVisualStyleBackColor = true;
+            this.ZilSaatleriGuncellemeButton.Click += new System.EventHandler(this.ZilSaatleriGuncellemeButton_Click);
+            // 
+            // z1oButton
+            // 
+            this.z1oButton.Location = new System.Drawing.Point(495, 17);
+            this.z1oButton.Name = "z1oButton";
+            this.z1oButton.Size = new System.Drawing.Size(75, 44);
+            this.z1oButton.TabIndex = 21;
+            this.z1oButton.Text = "Oynat";
+            this.z1oButton.UseVisualStyleBackColor = true;
+            this.z1oButton.Click += new System.EventHandler(this.z1oButton_Click);
+            // 
+            // z2Button
+            // 
+            this.z2Button.Location = new System.Drawing.Point(333, 70);
+            this.z2Button.Name = "z2Button";
+            this.z2Button.Size = new System.Drawing.Size(156, 44);
+            this.z2Button.TabIndex = 22;
+            this.z2Button.Text = "Öğretmen Zili Dosyası";
+            this.z2Button.UseVisualStyleBackColor = true;
+            // 
+            // zsButton
+            // 
+            this.zsButton.Location = new System.Drawing.Point(333, 170);
+            this.zsButton.Name = "zsButton";
+            this.zsButton.Size = new System.Drawing.Size(156, 44);
+            this.zsButton.TabIndex = 23;
+            this.zsButton.Text = "Zil Saatleri Dosyası";
+            this.zsButton.UseVisualStyleBackColor = true;
+            this.zsButton.Click += new System.EventHandler(this.zsButton_Click);
+            // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(577, 17);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(336, 44);
+            this.startButton.TabIndex = 24;
+            this.startButton.Text = "Çalıştır";
+            this.startButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1106, 574);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(925, 574);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.zsButton);
+            this.Controls.Add(this.z2Button);
+            this.Controls.Add(this.z1oButton);
+            this.Controls.Add(this.ZilSaatleriGuncellemeButton);
+            this.Controls.Add(this.PZR);
+            this.Controls.Add(this.CMT);
+            this.Controls.Add(this.CUM);
+            this.Controls.Add(this.PER);
+            this.Controls.Add(this.CAR);
+            this.Controls.Add(this.SAL);
+            this.Controls.Add(this.PZT);
+            this.Controls.Add(this.zsTextBox);
+            this.Controls.Add(this.imButton);
+            this.Controls.Add(this.imoButton);
+            this.Controls.Add(this.z2oButton);
+            this.Controls.Add(this.imTextBox);
+            this.Controls.Add(this.z2TextBox);
+            this.Controls.Add(this.z1TextBox);
+            this.Controls.Add(this.z1Button);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,18 +282,27 @@ namespace Zil
         #endregion
 
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button z1Button;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.TextBox textBox4;
-        public System.Windows.Forms.Button button8;
+        private System.Windows.Forms.TextBox z1TextBox;
+        private System.Windows.Forms.TextBox z2TextBox;
+        private System.Windows.Forms.TextBox imTextBox;
+        private System.Windows.Forms.Button z2oButton;
+        private System.Windows.Forms.Button imoButton;
+        private System.Windows.Forms.Button imButton;
+        private System.Windows.Forms.TextBox zsTextBox;
+        private System.Windows.Forms.ListBox PZT;
+        private System.Windows.Forms.ListBox SAL;
+        private System.Windows.Forms.ListBox CAR;
+        private System.Windows.Forms.ListBox CMT;
+        private System.Windows.Forms.ListBox CUM;
+        private System.Windows.Forms.ListBox PER;
+        private System.Windows.Forms.ListBox PZR;
+        private System.Windows.Forms.Button ZilSaatleriGuncellemeButton;
+        private System.Windows.Forms.Button z1oButton;
+        private System.Windows.Forms.Button z2Button;
+        private System.Windows.Forms.Button zsButton;
+        private System.Windows.Forms.Button startButton;
     }
 }
 
