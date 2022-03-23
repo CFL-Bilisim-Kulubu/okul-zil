@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace Zil
 {
@@ -13,17 +14,17 @@ namespace Zil
             string command = String.Format(FORMAT, fileName);
             mciSendString(command, null, 0, IntPtr.Zero);
         }
-
         public void Play()
         {
-            string command = "play MediaFile";
-            mciSendString(command, null, 0, IntPtr.Zero);
+            string command = "play MediaFile notify";
+            mciSendString(command, null, 0,IntPtr.Zero);
         }
         [DllImport("winmm.dll")]
-        private static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr hwndCallBack);
+        public static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr hwndCallBack);
         public void Dispose()
         {
-            string command = "stop MediaFile";
+            string command = "close MediaFile";
+            mciSendString(command, null, 0, IntPtr.Zero);
         }
     }
 }
