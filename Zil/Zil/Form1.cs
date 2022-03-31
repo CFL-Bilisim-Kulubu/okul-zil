@@ -122,13 +122,9 @@ namespace Zil
         {
             zilSaatleriKonum = openFile(zsTextBox, "Zil Saatleri Dosyası", excelDosyasiFiltresi);
             
-            const string FORMAT = @"""{0}""";
 
-            Excel excel = new Excel(@"zil.xlsx");
-            excel.Read();
-
-            tenefüsSaatler = excel.TablodakiSaatler;
-            tenefüsSüreler = excel.TenefüsDeğişkenleri;
+            Excel excel = new Excel(zilSaatleriKonum);
+            excel.Read(out tenefüsSaatler,out tenefüsSüreler);
         }
         private string openFile(TextBox textBox,string title, string filter)
         {

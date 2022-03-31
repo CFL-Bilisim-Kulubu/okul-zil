@@ -10,9 +10,9 @@ namespace Zil
     {
         public Worksheet sayfa1;
         private string[][] rawData;
-        public string[][] TablodakiSüreler,TablodakiSaatler;
-        public int[][][] TenefüsDeğişkenleri;
-        public string path;
+        private string[][] TablodakiSüreler,TablodakiSaatler;
+        private int[][][] TenefüsDeğişkenleri;
+        private string path;
 
         public Excel(string path)
         {
@@ -60,7 +60,7 @@ namespace Zil
             row = row.Substring(1);
             rawData[column][Int64.Parse(row)] = (string)cell.Value.Value;
         }
-        public void Read()
+        public void Read(out string[][] tenefusSaat, out int[][][] tenefusSure)
         {
             for (int i = 1; i < rawData.Length; i++)
             {
@@ -104,6 +104,8 @@ namespace Zil
                     TenefüsDeğişkenleri[i][j][1] = int.Parse(words[1]);
                 }
             }
+            tenefusSaat = TablodakiSaatler;
+            tenefusSure = TenefüsDeğişkenleri;
         }
     }
 }
