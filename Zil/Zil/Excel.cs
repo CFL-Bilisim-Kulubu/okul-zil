@@ -2,30 +2,67 @@
 using System.Threading.Tasks;   
 using System.Collections.Generic;
 using System.IO;
-using _Excel = Microsoft.Office.Interop.Excel;
-using Microsoft.Office.Interop.Excel;
+using NanoXLSX;
 
 namespace Zil
 {
     class Excel
     {
         public Worksheet sayfa1;
+        private string[][] rawData;
         public string[][] TablodakiSüreler,TablodakiSaatler;
         public int[][][] TenefüsDeğişkenleri;
         public string path;
 
         public Excel(string path)
         {
-            this.path = path;
-            Application uygulama = new _Excel.Application();
-            uygulama.Visible = true;
-            
-            Workbook kitap = uygulama.Workbooks.Open(path, 1);
-            sayfa1 = (Worksheet)kitap.Sheets[1];
+            using (FileStream fs = new FileStream(@"C:\Users\mertk\Documents\Github\cs\okul-zil\Zil\Zil\zil.xlsx", FileMode.Open))                 // Open the 'basic.xlsx' as file stream  
+            {
+                Workbook wb2 = Workbook.Load(fs);                                               // Read the file stream
+                Console.WriteLine("contains worksheet name: " + wb2.CurrentWorksheet.SheetName);
+                foreach (KeyValuePair<string, Cell> cell in wb2.CurrentWorksheet.Cells)         // Cycle through cells of loaded workbook (first worksheet)
+                {
+                    string cellKey = cell.Key;
+                    if (cellKey.Contains("B"))
+                        getRawData(cell, 1); 
+                    else if(cellKey.Contains("C"))
+                        getRawData(cell, 2);
+                    else if (cellKey.Contains("D"))
+                        getRawData(cell, 3);
+                    else if (cellKey.Contains("E"))
+                        getRawData(cell, 4);
+                    else if (cellKey.Contains("F"))
+                        getRawData(cell, 5);
+                    else if (cellKey.Contains("G"))
+                        getRawData(cell, 6);
+                    else if (cellKey.Contains("H"))
+                        getRawData(cell, 7);
+                    else if (cellKey.Contains("I"))
+                        getRawData(cell, 8);
+                    else if (cellKey.Contains("J"))
+                        getRawData(cell, 9);
+                    else if (cellKey.Contains("K"))
+                        getRawData(cell, 10);
+                    else if (cellKey.Contains("L"))
+                        getRawData(cell, 11);
+                    else if (cellKey.Contains("M"))
+                        getRawData(cell, 12);
+                    else if (cellKey.Contains("N"))
+                        getRawData(cell, 13);
+                    else if (cellKey.Contains("O"))
+                        getRawData(cell, 14);
+                }      //gözlerim kanıyo lütfen kızmayın
+            }
+        }
+        private void getRawData(KeyValuePair<string, Cell> cell, int column)
+        {
+            string row = cell.Key;
+            row = row.Substring(1);
+            rawData[column][Int64.Parse(row)] = (string)cell.Value.Value;
         }
         public void Read()
         {
-            for (int i = 1; i < sayfa1.Columns.Count; i++)
+            for (int i = 1; i < rawData.Length; i++)
             {
                 if (i % 2 == 0)// tablodkai saatleri excelden yazar
                 {
@@ -33,10 +70,10 @@ namespace Zil
                     int j = 1;
                     while (true)
                     {
-                        if ((string)sayfa1.Cells[i, j] == "")
+                        if (rawData[i][j] == "")
                             break;
 
-                        TablodakiSaatler[uzunluk][j - 1] = TablodakiSaatler[i][j];
+                        TablodakiSaatler[uzunluk][j - 1] = rawData[i][j];
                         j++;
                     }
                 }
@@ -46,10 +83,10 @@ namespace Zil
                     int j = 1;
                     while (true)
                     {
-                        if ((string)sayfa1.Cells[i, j] == "")
+                        if (rawData[i][j] == "")
                             break;
 
-                        TablodakiSüreler[uzunluk][j - 1] = TablodakiSüreler[i][j];
+                        TablodakiSüreler[uzunluk][j - 1] = rawData[i][j];
                         j++;
                     }
                 }
