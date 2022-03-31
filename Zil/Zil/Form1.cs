@@ -13,14 +13,11 @@ namespace Zil
 {
     public partial class Form1 : Form
     {
-        public void mp3Player(string fileName)
-        {
-            const string FORMAT = @"open ""{0}"" type mpegvideo alias MediaFile";
-            string command = String.Format(FORMAT, fileName);
-            mciSendString(command, null, 0, IntPtr.Zero);
-        }
-
-        private string z1, z2, im;
+        
+        private string zilSaatleriKonum, z1, z2, im,sesDosyasiFiltresi = "Ses Dosyası (*.mp3)|*.mp3"
+            ,excelDosyasiFiltresi = "Microsoft Excel Çalışma Sayfası(*.xlsx)|*.xlsx";
+        private string[][] tenefüsSaatler;
+        private int[][][] tenefüsSüreler;
 
         public Form1()
         {
@@ -48,15 +45,15 @@ namespace Zil
         }
         private void z1Button_Click(object sender, EventArgs e)
         {
-            z1 = openFile(z1TextBox, "Zil Dosyası");
+            z1 = openFile(z1TextBox, "Zil Dosyası", sesDosyasiFiltresi);
         }
         private void z2Button_Click(object sender, EventArgs e)
         {
-            z2 = openFile(z2TextBox, "Öğretmen Zili Dosyası");
+            z2 = openFile(z2TextBox, "Öğretmen Zili Dosyası", sesDosyasiFiltresi);
         }
         private void imButton_Click(object sender, EventArgs e)
         {
-            im = openFile(imTextBox, "İstiklal Marşı Dosyası");
+            im = openFile(imTextBox, "İstiklal Marşı Dosyası", sesDosyasiFiltresi);
         }
         private void imoButton_Click(object sender, EventArgs e)
         {
@@ -84,21 +81,61 @@ namespace Zil
         }
         private void ZilSaatleriGuncellemeButton_Click(object sender, EventArgs e)
         {
+            PZT.Items.Clear();
+            SAL.Items.Clear();
+            CAR.Items.Clear();
+            PER.Items.Clear();
+            CUM.Items.Clear();
+            CMT.Items.Clear();
+            PZR.Items.Clear();
 
+            foreach(string saat in tenefüsSaatler[0])
+            {
+                PZT.Items.Add(saat);
+            }
+            foreach (string saat in tenefüsSaatler[1])
+            {
+                SAL.Items.Add(saat);
+            }
+            foreach (string saat in tenefüsSaatler[2])
+            {
+                CAR.Items.Add(saat);
+            }
+            foreach (string saat in tenefüsSaatler[3])
+            {
+                PER.Items.Add(saat);
+            }
+            foreach (string saat in tenefüsSaatler[4])
+            {
+                CUM.Items.Add(saat);
+            }
+            foreach (string saat in tenefüsSaatler[5])
+            {
+                CMT.Items.Add(saat);
+            }
+            foreach (string saat in tenefüsSaatler[6])
+            {
+                PZR.Items.Add(saat);
+            }
         }
         private void zsButton_Click(object sender, EventArgs e)
         {
+            zilSaatleriKonum = openFile(zsTextBox, "Zil Saatleri Dosyası", excelDosyasiFiltresi);
+            
+            const string FORMAT = @"""{0}""";
 
+            Excel excel = new Excel(@"zil.xlsx");
+            excel.Read();
+
+            tenefüsSaatler = excel.TablodakiSaatler;
+            tenefüsSüreler = excel.TenefüsDeğişkenleri;
         }
-
-      
-
-        private string openFile(TextBox textBox,string title)
+        private string openFile(TextBox textBox,string title, string filter)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = title;
             openFileDialog.InitialDirectory = @"C:\";
-            openFileDialog.Filter = "Ses Dosyası (*.mp3)|*.mp3";
+            openFileDialog.Filter = filter;
             openFileDialog.FilterIndex = 1;
             openFileDialog.ShowDialog();
             if(openFileDialog.FileName == "")
@@ -110,7 +147,16 @@ namespace Zil
             return openFileDialog.FileName;
         }
 
+
         [DllImport("winmm.dll")]
         public static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr hwndCallBack);
+
+        public void mp3Player(string fileName)
+        {
+            const string FORMAT = @"open ""{0}"" type mpegvideo alias MediaFile";
+            string command = String.Format(FORMAT, fileName);
+            mciSendString(command, null, 0, IntPtr.Zero);
+        }
+
     }
 }
