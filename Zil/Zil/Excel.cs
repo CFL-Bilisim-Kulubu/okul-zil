@@ -9,60 +9,72 @@ namespace Zil
     class Excel
     {
         public Worksheet sayfa1;
-        private string[][] rawData;
-        private string[][] TablodakiSüreler,TablodakiSaatler;
-        private int[][][] TenefüsDeğişkenleri;
-        private string path;
+        public string[][] TablodakiSüreler, TablodakiSaatler;
+        public int[][][] TenefüsDeğişkenleri;
+        public string path;
+
+        public string[][] RawData = new string[9][];
 
         public Excel(string path)
         {
+            for (int i = 0; i < RawData.Length; i++)
+            {
+                RawData[i] = new string[15];
+            }
             using (FileStream fs = new FileStream(@"C:\Users\mertk\Documents\Github\cs\okul-zil\Zil\Zil\zil.xlsx", FileMode.Open))                 // Open the 'basic.xlsx' as file stream  
             {
+                
+
                 Workbook wb2 = Workbook.Load(fs);                                               // Read the file stream
                 Console.WriteLine("contains worksheet name: " + wb2.CurrentWorksheet.SheetName);
                 foreach (KeyValuePair<string, Cell> cell in wb2.CurrentWorksheet.Cells)         // Cycle through cells of loaded workbook (first worksheet)
                 {
                     string cellKey = cell.Key;
                     if (cellKey.Contains("B"))
-                        getRawData(cell, 1); 
+                        getRawData(cell.Value.Value.ToString(), 1, cell.Key); 
                     else if(cellKey.Contains("C"))
-                        getRawData(cell, 2);
+                        getRawData(cell.Value.Value.ToString(), 2, cell.Key);
                     else if (cellKey.Contains("D"))
-                        getRawData(cell, 3);
+                        getRawData(cell.Value.Value.ToString(), 3, cell.Key);
                     else if (cellKey.Contains("E"))
-                        getRawData(cell, 4);
+                        getRawData(cell.Value.Value.ToString(), 4, cell.Key);
                     else if (cellKey.Contains("F"))
-                        getRawData(cell, 5);
+                        getRawData(cell.Value.Value.ToString(), 5, cell.Key);
                     else if (cellKey.Contains("G"))
-                        getRawData(cell, 6);
+                        getRawData(cell.Value.Value.ToString(), 6, cell.Key);
                     else if (cellKey.Contains("H"))
-                        getRawData(cell, 7);
+                        getRawData(cell.Value.Value.ToString(), 7, cell.Key);
                     else if (cellKey.Contains("I"))
-                        getRawData(cell, 8);
+                        getRawData(cell.Value.Value.ToString(), 8, cell.Key);
                     else if (cellKey.Contains("J"))
-                        getRawData(cell, 9);
+                        getRawData(cell.Value.Value.ToString(), 9, cell.Key);
                     else if (cellKey.Contains("K"))
-                        getRawData(cell, 10);
+                        getRawData(cell.Value.Value.ToString(), 10, cell.Key);
                     else if (cellKey.Contains("L"))
-                        getRawData(cell, 11);
+                        getRawData(cell.Value.Value.ToString(), 11, cell.Key);
                     else if (cellKey.Contains("M"))
-                        getRawData(cell, 12);
+                        getRawData(cell.Value.Value.ToString(), 2, cell.Key);
                     else if (cellKey.Contains("N"))
-                        getRawData(cell, 13);
+                        getRawData(cell.Value.Value.ToString(), 13, cell.Key);
                     else if (cellKey.Contains("O"))
-                        getRawData(cell, 14);
+                        getRawData(cell.Value.Value.ToString(), 14, cell.Key);
                 }      //gözlerim kanıyo lütfen kızmayın
             }
         }
-        private void getRawData(KeyValuePair<string, Cell> cell, int column)
+        public void getRawData(string value, int column,string key)
         {
-            string row = cell.Key;
+            string row = key;
             row = row.Substring(1);
-            rawData[column][Int64.Parse(row)] = (string)cell.Value.Value;
+            int rowAsInt = Int16.Parse(row);
+
+            if (rowAsInt >= 99)
+                return;
+
+            RawData[column][rowAsInt] = value;
         }
         public void Read(out string[][] tenefusSaat, out int[][][] tenefusSure)
         {
-            for (int i = 1; i < rawData.Length; i++)
+            for (int i = 1; i < RawData.Length; i++)
             {
                 if (i % 2 == 0)// tablodkai saatleri excelden yazar
                 {
@@ -70,10 +82,10 @@ namespace Zil
                     int j = 1;
                     while (true)
                     {
-                        if (rawData[i][j] == "")
+                        if (RawData[i][j] == "")
                             break;
 
-                        TablodakiSaatler[uzunluk][j - 1] = rawData[i][j];
+                        TablodakiSaatler[uzunluk][j - 1] = RawData[i][j];
                         j++;
                     }
                 }
@@ -83,10 +95,10 @@ namespace Zil
                     int j = 1;
                     while (true)
                     {
-                        if (rawData[i][j] == "")
+                        if (RawData[i][j] == "")
                             break;
 
-                        TablodakiSüreler[uzunluk][j - 1] = rawData[i][j];
+                        TablodakiSüreler[uzunluk][j - 1] = RawData[i][j];
                         j++;
                     }
                 }

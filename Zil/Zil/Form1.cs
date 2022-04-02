@@ -121,10 +121,13 @@ namespace Zil
         private void zsButton_Click(object sender, EventArgs e)
         {
             zilSaatleriKonum = openFile(zsTextBox, "Zil Saatleri Dosyası", excelDosyasiFiltresi);
-            
+
+            if (zilSaatleriKonum == null || zilSaatleriKonum == "")
+                return;
 
             Excel excel = new Excel(zilSaatleriKonum);
             excel.Read(out tenefüsSaatler,out tenefüsSüreler);
+
         }
         private string openFile(TextBox textBox,string title, string filter)
         {
