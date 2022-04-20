@@ -1,25 +1,24 @@
-﻿using System;
-using System.Threading.Tasks;   
+﻿using NanoXLSX;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using NanoXLSX;
 
 namespace Zil
 {
-    class Excel
+    internal class Excel
     {
         public Worksheet sayfa1;
-        public string[,] TablodakiSüreler , TablodakiSaatler;
+        public string[,] TablodakiSüreler, TablodakiSaatler;
         public int[,,] TenefüsDeğişkenleri;
         public string path;
 
-        public string[,] RawData = new string[14,20];
+        public string[,] RawData = new string[14, 20];
 
         public Excel(string path)
         {
             using (FileStream fs = new FileStream(@"C:\Users\mertk\Documents\Github\cs\okul-zil\Zil\Zil\zil.xlsx", FileMode.Open))                 // Open the 'basic.xlsx' as file stream  
             {
-                
+
 
                 Workbook wb2 = Workbook.Load(fs);                                               // Read the file stream
                 Console.WriteLine("contains worksheet name: " + wb2.CurrentWorksheet.SheetName);
@@ -27,8 +26,8 @@ namespace Zil
                 {
                     string cellKey = cell.Key;
                     if (cellKey.Contains("B"))
-                        getRawData(cell.Value.Value.ToString(), 1, cell.Key); 
-                    else if(cellKey.Contains("C"))
+                        getRawData(cell.Value.Value.ToString(), 1, cell.Key);
+                    else if (cellKey.Contains("C"))
                         getRawData(cell.Value.Value.ToString(), 2, cell.Key);
                     else if (cellKey.Contains("D"))
                         getRawData(cell.Value.Value.ToString(), 3, cell.Key);
@@ -42,7 +41,7 @@ namespace Zil
                         getRawData(cell.Value.Value.ToString(), 7, cell.Key);
                     else if (cellKey.Contains("I"))
                         getRawData(cell.Value.Value.ToString(), 8, cell.Key);
-                    else if (cellKey.Contains("J"))
+                     else if  (cellKey.Contains("J"))
                         getRawData(cell.Value.Value.ToString(), 9, cell.Key);
                     else if (cellKey.Contains("K"))
                         getRawData(cell.Value.Value.ToString(), 10, cell.Key);
@@ -57,16 +56,16 @@ namespace Zil
                 }      //gözlerim kanıyo lütfen kızmayın
             }
         }
-        public void getRawData(string value, int column,string key)
+        public void getRawData(string value, int column, string key)
         {
             string row = key;
             row = row.Substring(1);
-            int rowAsInt = Int16.Parse(row);
+            int rowAsInt = short.Parse(row);
 
             if (rowAsInt >= 20)
                 return;
 
-            RawData[column,rowAsInt] = value;
+            RawData[column, rowAsInt] = value;
         }
         public void Read(out string[,] tenefusSaat, out int[,,] tenefusSure)
         {
@@ -87,7 +86,7 @@ namespace Zil
                         if (j > 15)
                             break;
 
-                        TablodakiSaatler[i/2,j - 1] = RawData[i,j];
+                        TablodakiSaatler[i / 2, j - 1] = RawData[i, j];
                         j++;
                     }
                 }
@@ -100,7 +99,7 @@ namespace Zil
                         if (j > 15)
                             break;
 
-                        TablodakiSüreler[(i-1)/2,j - 1] = RawData[i,j];
+                        TablodakiSüreler[(i - 1) / 2, j - 1] = RawData[i, j];
                         j++;
                     }
                 }
@@ -111,15 +110,16 @@ namespace Zil
             {
                 for (int j = 1; j < TablodakiSüreler.GetLength(1); j++)
                 {
-                    string parse = new string(TablodakiSüreler[i,j]);
+                    string parse = new string(TablodakiSüreler[i, j]);
 
-                    if (parse != null || parse != "")
+                    if (parse is null || parse == "")
                     {
-                        
-                        string[] words = parse.Split("*");
-                        TenefüsDeğişkenleri[i, j, 0] = int.Parse(words[0]) - int.Parse(words[1]);
-                        TenefüsDeğişkenleri[i, j, 1] = int.Parse(words[1]);
+                        continue;
                     }
+
+                    string[] words = parse.Split("*");
+                    TenefüsDeğişkenleri[i, j, 0] = int.Parse(words[0]) - int.Parse(words[1]);
+                    TenefüsDeğişkenleri[i, j, 1] = int.Parse(words[1]);
                 }
             }
             tenefusSaat = TablodakiSaatler;

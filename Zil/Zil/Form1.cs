@@ -16,8 +16,8 @@ namespace Zil
         
         private string zilSaatleriKonum, z1, z2, im,sesDosyasiFiltresi = "Ses Dosyası (*.mp3)|*.mp3"
             ,excelDosyasiFiltresi = "Microsoft Excel Çalışma Sayfası(*.xlsx)|*.xlsx";
-        private string[,] tenefüsSaatler;
-        private int[,,] tenefüsSüreler;
+        private string[,] tenefüsSaatler = new string[7,20];
+        private int[,,] tenefüsSüreler = new int[7, 20, 2];
 
         public Form1()
         {
@@ -88,36 +88,42 @@ namespace Zil
             CUM.Items.Clear();
             CMT.Items.Clear();
             PZR.Items.Clear();
-            /*
-            foreach(string saat in tenefüsSaatler[0])
+
+            for (int i = 0; i < tenefüsSaatler.GetLength(1); i++)
             {
-                PZT.Items.Add(saat);
+                if (tenefüsSaatler[0, i] == null || tenefüsSaatler[0, i] == "") continue;
+                PZT.Items.Add(tenefüsSaatler[0, i]);
             }
-            foreach (string saat in tenefüsSaatler[1])
+            for (int i = 0; i < tenefüsSaatler.GetLength(1); i++)
             {
-                SAL.Items.Add(saat);
+                if (tenefüsSaatler[1, i] == null || tenefüsSaatler[1, i] == "") continue;
+                SAL.Items.Add(tenefüsSaatler[1, i]);
             }
-            foreach (string saat in tenefüsSaatler[2])
+            for (int i = 0; i < tenefüsSaatler.GetLength(1); i++)
             {
-                CAR.Items.Add(saat);
+                if (tenefüsSaatler[2, i] == null || tenefüsSaatler[2, i] == "") continue;
+                CAR.Items.Add(tenefüsSaatler[2, i]);
             }
-            foreach (string saat in tenefüsSaatler[3])
+            for (int i = 0; i < tenefüsSaatler.GetLength(1); i++)
             {
-                PER.Items.Add(saat);
+                if (tenefüsSaatler[3, i] == null || tenefüsSaatler[3, i] == "") continue;
+                PER.Items.Add(tenefüsSaatler[3, i]);
             }
-            foreach (string saat in tenefüsSaatler[4])
+            for (int i = 0; i < tenefüsSaatler.GetLength(1); i++)
             {
-                CUM.Items.Add(saat);
+                if (tenefüsSaatler[4, i] == null || tenefüsSaatler[4, i] == "") continue;
+                CUM.Items.Add(tenefüsSaatler[4, i]);
             }
-            foreach (string saat in tenefüsSaatler[5])
+            for (int i = 0; i < tenefüsSaatler.GetLength(1); i++)
             {
-                CMT.Items.Add(saat);
+                if (tenefüsSaatler[5, i] == null || tenefüsSaatler[5, i] == "") continue;
+                CMT.Items.Add(tenefüsSaatler[5, i]);
             }
-            foreach (string saat in tenefüsSaatler[6])
+            for (int i = 0; i < tenefüsSaatler.GetLength(1); i++)
             {
-                PZR.Items.Add(saat);
+                if (tenefüsSaatler[6, i] == null || tenefüsSaatler[6, i] == "") continue;
+                PZR.Items.Add(tenefüsSaatler[6, i]);
             }
-            */
         }
         private void zsButton_Click(object sender, EventArgs e)
         {
