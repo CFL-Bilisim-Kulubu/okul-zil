@@ -9,18 +9,14 @@ namespace Zil
     class Excel
     {
         public Worksheet sayfa1;
-        public string[][] TablodakiSüreler, TablodakiSaatler;
-        public int[][][] TenefüsDeğişkenleri;
+        public string[,] TablodakiSüreler, TablodakiSaatler;
+        public int[,,] TenefüsDeğişkenleri;
         public string path;
 
-        public string[][] RawData = new string[9][];
+        public string[,] RawData = new string[9,15];
 
         public Excel(string path)
         {
-            for (int i = 0; i < RawData.Length; i++)
-            {
-                RawData[i] = new string[15];
-            }
             using (FileStream fs = new FileStream(@"C:\Users\mertk\Documents\Github\cs\okul-zil\Zil\Zil\zil.xlsx", FileMode.Open))                 // Open the 'basic.xlsx' as file stream  
             {
                 
@@ -70,11 +66,11 @@ namespace Zil
             if (rowAsInt >= 99)
                 return;
 
-            RawData[column][rowAsInt] = value;
+            RawData[column,rowAsInt] = value;
         }
-        public void Read(out string[][] tenefusSaat, out int[][][] tenefusSure)
+        public void Read(out string[,] tenefusSaat, out int[,,] tenefusSure)
         {
-            for (int i = 1; i < RawData.Length; i++)
+            for (int i = 1; i < RawData.GetLength(0); i++)
             {
                 if (i % 2 == 0)// tablodkai saatleri excelden yazar
                 {
@@ -82,10 +78,10 @@ namespace Zil
                     int j = 1;
                     while (true)
                     {
-                        if (RawData[i][j] == "")
+                        if (RawData[i,j] == "")
                             break;
 
-                        TablodakiSaatler[uzunluk][j - 1] = RawData[i][j];
+                        TablodakiSaatler[uzunluk,j - 1] = RawData[i,j];
                         j++;
                     }
                 }
@@ -95,25 +91,25 @@ namespace Zil
                     int j = 1;
                     while (true)
                     {
-                        if (RawData[i][j] == "")
+                        if (RawData[i,j] == "")
                             break;
 
-                        TablodakiSüreler[uzunluk][j - 1] = RawData[i][j];
+                        TablodakiSüreler[uzunluk,j - 1] = RawData[i,j];
                         j++;
                     }
                 }
             }
 
 
-            for (int i = 0; i < TablodakiSüreler.Length; i++)
+            for (int i = 0; i < TablodakiSüreler.GetLength(0); i++)
             {
-                for (int j = 0; j < TablodakiSüreler[i].Length; j++)
+                for (int j = 0; j < TablodakiSüreler.GetLength(1); j++)
                 {
-                    string parse = new string(TablodakiSüreler[i][j]);
+                    string parse = new string(TablodakiSüreler[i,j]);
                     string[] words = parse.Split("*");
 
-                    TenefüsDeğişkenleri[i][j][0] = int.Parse(words[0]) - int.Parse(words[1]);
-                    TenefüsDeğişkenleri[i][j][1] = int.Parse(words[1]);
+                    TenefüsDeğişkenleri[i,j,0] = int.Parse(words[0]) - int.Parse(words[1]);
+                    TenefüsDeğişkenleri[i,j,1] = int.Parse(words[1]);
                 }
             }
             tenefusSaat = TablodakiSaatler;
