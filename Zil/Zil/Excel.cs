@@ -13,7 +13,7 @@ namespace Zil
         public int[,,] TenefüsDeğişkenleri;
         public string path;
 
-        public string[,] RawData = new string[9,15];
+        public string[,] RawData = new string[14,20];
 
         public Excel(string path)
         {
@@ -63,7 +63,7 @@ namespace Zil
             row = row.Substring(1);
             int rowAsInt = Int16.Parse(row);
 
-            if (rowAsInt >= 99)
+            if (rowAsInt >= 20)
                 return;
 
             RawData[column,rowAsInt] = value;
@@ -74,7 +74,7 @@ namespace Zil
             {
                 if (i % 2 == 0)// tablodkai saatleri excelden yazar
                 {
-                    int uzunluk = TablodakiSaatler.Length;
+                    int uzunluk = TablodakiSaatler.GetLength(0);
                     int j = 1;
                     while (true)
                     {
@@ -87,7 +87,7 @@ namespace Zil
                 }
                 else//tablodaki günleri excelden yazar
                 {
-                    int uzunluk = TablodakiSüreler.Length;
+                    int uzunluk = TablodakiSüreler.GetLength(0);
                     int j = 1;
                     while (true)
                     {

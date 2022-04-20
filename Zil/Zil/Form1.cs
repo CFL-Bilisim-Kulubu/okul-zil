@@ -16,8 +16,8 @@ namespace Zil
         
         private string zilSaatleriKonum, z1, z2, im,sesDosyasiFiltresi = "Ses Dosyası (*.mp3)|*.mp3"
             ,excelDosyasiFiltresi = "Microsoft Excel Çalışma Sayfası(*.xlsx)|*.xlsx";
-        private string[][] tenefüsSaatler;
-        private int[][][] tenefüsSüreler;
+        private string[,] tenefüsSaatler;
+        private int[,,] tenefüsSüreler;
 
         public Form1()
         {
@@ -88,7 +88,7 @@ namespace Zil
             CUM.Items.Clear();
             CMT.Items.Clear();
             PZR.Items.Clear();
-
+            /*
             foreach(string saat in tenefüsSaatler[0])
             {
                 PZT.Items.Add(saat);
@@ -117,6 +117,7 @@ namespace Zil
             {
                 PZR.Items.Add(saat);
             }
+            */
         }
         private void zsButton_Click(object sender, EventArgs e)
         {
