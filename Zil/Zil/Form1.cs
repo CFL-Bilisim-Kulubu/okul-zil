@@ -3,46 +3,36 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Timers;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Timers.Timer;
 
 namespace Zil
 {
     public partial class Form1 : Form
     {
-        
-        private string zilSaatleriKonum, z1, z2, im,sesDosyasiFiltresi = "Ses Dosyası (*.mp3)|*.mp3"
-            ,excelDosyasiFiltresi = "Microsoft Excel Çalışma Sayfası(*.xlsx)|*.xlsx";
+        private System.Timers.Timer timer;
+        private string zilSaatleriKonum, z1, z2, 
+            im,sesDosyasiFiltresi = "Ses Dosyası (*.mp3)|*.mp3",
+            excelDosyasiFiltresi = "Microsoft Excel Çalışma Sayfası(*.xlsx)|*.xlsx";
         private string[,] tenefüsSaatler = new string[7,20];
         private int[,,] tenefüsSüreler = new int[7, 20, 2];
+        private int tenefüsId = 0;
 
         public Form1()
         {
             InitializeComponent();
         }
-
-        // Declare the nofify constant
-        public const int MM_MCINOTIFY = 953;
-
-        // Override the WndProc function in the form
-        protected override void WndProc(ref Message m)
-        {
-
-            if (m.Msg == MM_MCINOTIFY)
-            {
-                string command = "close MediaFile";
-                mciSendString(command, null, 0, IntPtr.Zero);
-            }
-            base.WndProc(ref m);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
+
+        #region Ses Dosyalarını Açan Tuşlar
         private void z1Button_Click(object sender, EventArgs e)
         {
             z1 = openFile(z1TextBox, "Zil Dosyası", sesDosyasiFiltresi);
@@ -55,6 +45,9 @@ namespace Zil
         {
             im = openFile(imTextBox, "İstiklal Marşı Dosyası", sesDosyasiFiltresi);
         }
+        #endregion
+
+        #region Ses Çalan Tuşlar
         private void imoButton_Click(object sender, EventArgs e)
         {
             if (im == "" || im == null)
@@ -79,6 +72,8 @@ namespace Zil
             string command = "play MediaFile notify";
             mciSendString(command, null, 0, this.Handle);
         }
+        #endregion
+
         private void ZilSaatleriGuncellemeButton_Click(object sender, EventArgs e)
         {
             PZT.Items.Clear();
@@ -136,23 +131,87 @@ namespace Zil
             excel.Read(out tenefüsSaatler,out tenefüsSüreler);
 
         }
+
+        private void calistir_Click(object sender, EventArgs e)
+        {
+            timerManager(tenefüsSaatler[0,tenefüsId]);
+        }
+        private void timerManager(string time)
+        {
+            string[]parsedTimes = time.Split(".");
+            int hour, minute;
+            try
+            {
+                hour = Int32.Parse(parsedTimes[0]);
+                minute = Int32.Parse(parsedTimes[1]);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            DateTime nowTime = DateTime.Now;
+            DateTime scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, hour, minute, 0, 0);
+
+            if (nowTime > scheduledTime)
+            {
+                tenefüsId++;
+                timerManager(tenefüsSaatler[0, tenefüsId]);
+                return;
+            }
+
+            double tickTime = (double)(scheduledTime - DateTime.Now).TotalMilliseconds;
+
+            timer = new Timer(tickTime);
+            timer.Elapsed += timerBitti;
+            timer.Start();
+        }
+        private void timerBitti(object sender, ElapsedEventArgs e)
+        {
+            timer.Stop();
+            tenefüsId++;
+
+            mp3Player(z1);
+
+            timerManager(tenefüsSaatler[0,tenefüsId]);
+        }
+
         private string openFile(TextBox textBox,string title, string filter)
         {
+            if (textBox == null || title == null || filter == null || title == "" || filter == "")  return "";
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Title = title;
             openFileDialog.InitialDirectory = @"C:\";
             openFileDialog.Filter = filter;
             openFileDialog.FilterIndex = 1;
             openFileDialog.ShowDialog();
+
             if(openFileDialog.FileName == "")
             {
-                textBox.Text = "!!LUTFEN DOSYA SEÇİNİZ!!";
+                textBox.Text = " !! LUTFEN DOSYA SEÇİNİZ !! ";
                 return "";
             }
+            
             textBox.Text = openFileDialog.FileName;
             return openFileDialog.FileName;
         }
 
+        #region Ses Oynatma Sistemi
+
+        // Declare the nofify constant
+        public const int MM_MCINOTIFY = 953;
+
+        // Override the WndProc function in the form
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == MM_MCINOTIFY)
+            {
+                string command = "close MediaFile";
+                mciSendString(command, null, 0, IntPtr.Zero);
+            }
+            base.WndProc(ref m);
+        }
 
         [DllImport("winmm.dll")]
         public static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr hwndCallBack);
@@ -163,6 +222,8 @@ namespace Zil
             string command = String.Format(FORMAT, fileName);
             mciSendString(command, null, 0, IntPtr.Zero);
         }
+
+        #endregion
 
     }
 }

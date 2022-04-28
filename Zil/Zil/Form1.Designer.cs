@@ -49,8 +49,8 @@ namespace Zil
             this.z1oButton = new System.Windows.Forms.Button();
             this.z2Button = new System.Windows.Forms.Button();
             this.zsButton = new System.Windows.Forms.Button();
-            this.startButton = new System.Windows.Forms.Button();
             this.z1TextBox = new System.Windows.Forms.TextBox();
+            this.calistir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // openFileDialog1
@@ -59,6 +59,7 @@ namespace Zil
             // 
             // z1Button
             // 
+            this.z1Button.Cursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.z1Button.Location = new System.Drawing.Point(333, 17);
             this.z1Button.Name = "z1Button";
             this.z1Button.Size = new System.Drawing.Size(156, 44);
@@ -236,15 +237,6 @@ namespace Zil
             this.zsButton.UseVisualStyleBackColor = true;
             this.zsButton.Click += new System.EventHandler(this.zsButton_Click);
             // 
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(577, 17);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(336, 44);
-            this.startButton.TabIndex = 24;
-            this.startButton.Text = "Çalıştır";
-            this.startButton.UseVisualStyleBackColor = true;
-            // 
             // z1TextBox
             // 
             this.z1TextBox.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -254,13 +246,23 @@ namespace Zil
             this.z1TextBox.Size = new System.Drawing.Size(318, 23);
             this.z1TextBox.TabIndex = 25;
             // 
+            // calistir
+            // 
+            this.calistir.Location = new System.Drawing.Point(576, 17);
+            this.calistir.Name = "calistir";
+            this.calistir.Size = new System.Drawing.Size(87, 197);
+            this.calistir.TabIndex = 26;
+            this.calistir.Text = "Çalıştır";
+            this.calistir.UseVisualStyleBackColor = true;
+            this.calistir.Click += new System.EventHandler(this.calistir_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(925, 574);
+            this.ClientSize = new System.Drawing.Size(675, 574);
+            this.Controls.Add(this.calistir);
             this.Controls.Add(this.z1TextBox);
-            this.Controls.Add(this.startButton);
             this.Controls.Add(this.zsButton);
             this.Controls.Add(this.z2Button);
             this.Controls.Add(this.z1oButton);
@@ -309,8 +311,8 @@ namespace Zil
         private System.Windows.Forms.Button z1oButton;
         private System.Windows.Forms.Button z2Button;
         private System.Windows.Forms.Button zsButton;
-        private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.TextBox z1TextBox;
+        private System.Windows.Forms.Button calistir;
     }
 }
 
