@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Zil": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

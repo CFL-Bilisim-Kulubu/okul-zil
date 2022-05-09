@@ -10,18 +10,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Timer = System.Timers.Timer;
+using System.Diagnostics;
+using System.Media;
 
 namespace Zil
 {
     public partial class Form1 : Form
     {
+        SoundPlayer sPlayer;
+        private IntPtr ğ;
         private System.Timers.Timer timer;
         private string zilSaatleriKonum, z1, z2, 
-            im,sesDosyasiFiltresi = "Ses Dosyası (*.mp3)|*.mp3",
+            im,sesDosyasiFiltresi = "Ses Dosyası (*.wav)|*.wav",
             excelDosyasiFiltresi = "Microsoft Excel Çalışma Sayfası(*.xlsx)|*.xlsx";
         private string[,] tenefüsSaatler = new string[7,20];
         private int[,,] tenefüsSüreler = new int[7, 20, 2];
-        private int tenefüsId = 0;
+        private int tenefüsId = 1,gün;
 
         public Form1()
         {
@@ -29,7 +33,9 @@ namespace Zil
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            DateTime nowTime = DateTime.Now;
+            gün = (int)(nowTime.DayOfWeek + 6) % 7;
+            Debug.WriteLine(" günlerden : " + gün);
         }
 
         #region Ses Dosyalarını Açan Tuşlar
@@ -52,6 +58,8 @@ namespace Zil
         {
             if (im == "" || im == null)
                 return;
+            stopAudio();
+
             mp3Player(im);
             string command = "play MediaFile notify";
             mciSendString(command, null, 0, this.Handle);
@@ -60,14 +68,19 @@ namespace Zil
         {
             if (z2 == "" || z2 == null)
                 return;
+            stopAudio();
+
             mp3Player(z2);
             string command = "play MediaFile notify";
+            
             mciSendString(command, null, 0, this.Handle);
         }
         private void z1oButton_Click(object sender, EventArgs e)
         {
             if (z1 == "" || z1 == null)
                 return;
+            stopAudio();
+
             mp3Player(z1);
             string command = "play MediaFile notify";
             mciSendString(command, null, 0, this.Handle);
@@ -132,13 +145,26 @@ namespace Zil
 
         }
 
+        #region zilZamanlayıcıSistem
+
         private void calistir_Click(object sender, EventArgs e)
         {
-            timerManager(tenefüsSaatler[0,tenefüsId]);
+            zilBaşlat(tenefüsSaatler[gün,tenefüsId]);
+            calistir.Enabled = false;
+            Debug.WriteLine(" Zil çalıştırıldı ");
         }
-        private void timerManager(string time)
+        private void timerAyarlayıcı(DateTime time,ElapsedEventHandler e)
         {
-            string[]parsedTimes = time.Split(".");
+            double tickTime = (double)(time - DateTime.Now).TotalMilliseconds;
+
+            timer = new Timer(tickTime);
+            timer.Elapsed += new ElapsedEventHandler(e);
+            timer.Start();
+        }
+        private void zilBaşlat(string time)
+        {
+            Debug.WriteLine(time);
+            string[] parsedTimes = time.Split(".");
             int hour, minute;
             try
             {
@@ -152,29 +178,78 @@ namespace Zil
 
             DateTime nowTime = DateTime.Now;
             DateTime scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, hour, minute, 0, 0);
+            Debug.WriteLine(scheduledTime);
 
             if (nowTime > scheduledTime)
             {
                 tenefüsId++;
-                timerManager(tenefüsSaatler[0, tenefüsId]);
+                zilBaşlat(tenefüsSaatler[gün, tenefüsId]);
                 return;
             }
-
-            double tickTime = (double)(scheduledTime - DateTime.Now).TotalMilliseconds;
-
-            timer = new Timer(tickTime);
-            timer.Elapsed += timerBitti;
-            timer.Start();
+            timerAyarlayıcı(scheduledTime, new ElapsedEventHandler(zilPart1));
         }
-        private void timerBitti(object sender, ElapsedEventArgs e)
+        private void zilPart1(object sender, ElapsedEventArgs e)
         {
             timer.Stop();
+
+            if (z1 == "" || z1 == null)
+                return;
+
+
+            sPlayer = new SoundPlayer(z1);
+            sPlayer.Play();
+
+            Debug.WriteLine("süre" + tenefüsSüreler[0,tenefüsId,1]);
+            int minute = tenefüsSüreler[0, tenefüsId, 0];
+
+            DateTime nowTime = DateTime.Now;
+            DateTime scheduledTime;
+
+            if (nowTime.Minute + minute < 60)
+            {
+                scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, nowTime.Hour, nowTime.Minute + minute, 0, 0);
+            }
+            else
+            {
+                scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, nowTime.Hour + 1, nowTime.Minute + minute - 60, 0, 0);
+            }
+            Debug.WriteLine(scheduledTime);
+
+            timerAyarlayıcı(scheduledTime, new ElapsedEventHandler(zilPart2));
+        }
+        private void zilPart2(object sender, ElapsedEventArgs e)
+        {
+            timer.Stop();
+
+            if (z2 == "" || z2 == null)
+                return;
+
+
+            sPlayer = new SoundPlayer(z2);
+            sPlayer.Play();
+
+            Debug.WriteLine("süre" + tenefüsSüreler[0, tenefüsId, 1]);
+            int minute = tenefüsSüreler[0, tenefüsId, 0];
+
+            DateTime nowTime = DateTime.Now;
+            DateTime scheduledTime;
+
+            if (nowTime.Minute + minute < 60)
+            {
+                scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, nowTime.Hour, nowTime.Minute + minute, 0, 0);
+            }
+            else
+            {
+                scheduledTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, nowTime.Hour + 1, nowTime.Minute + minute - 60, 0, 0);
+            }
+            Debug.WriteLine(scheduledTime);
+
             tenefüsId++;
 
-            mp3Player(z1);
-
-            timerManager(tenefüsSaatler[0,tenefüsId]);
+            zilBaşlat(tenefüsSaatler[gün,tenefüsId]);
         }
+
+        #endregion
 
         private string openFile(TextBox textBox,string title, string filter)
         {
@@ -197,7 +272,7 @@ namespace Zil
             return openFileDialog.FileName;
         }
 
-        #region Ses Oynatma Sistemi
+        #region Ses Oynatma Sistemi - Eski - Test kısmı için
 
         // Declare the nofify constant
         public const int MM_MCINOTIFY = 953;
@@ -207,11 +282,11 @@ namespace Zil
         {
             if (m.Msg == MM_MCINOTIFY)
             {
-                string command = "close MediaFile";
-                mciSendString(command, null, 0, IntPtr.Zero);
+                stopAudio();
             }
             base.WndProc(ref m);
         }
+
 
         [DllImport("winmm.dll")]
         public static extern long mciSendString(string strCommand, StringBuilder strReturn, int iReturnLength, IntPtr hwndCallBack);
@@ -220,6 +295,12 @@ namespace Zil
         {
             const string FORMAT = @"open ""{0}"" type mpegvideo alias MediaFile";
             string command = String.Format(FORMAT, fileName);
+            mciSendString(command, null, 0, IntPtr.Zero);
+        }
+
+        private void stopAudio()
+        {
+            string command = "close MediaFile";
             mciSendString(command, null, 0, IntPtr.Zero);
         }
 
