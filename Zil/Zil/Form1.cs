@@ -89,6 +89,18 @@ namespace Zil
 
         private void ZilSaatleriGuncellemeButton_Click(object sender, EventArgs e)
         {
+            
+        }
+        private void zsButton_Click(object sender, EventArgs e)
+        {
+            zilSaatleriKonum = openFile(zsTextBox, "Zil Saatleri Dosyası", excelDosyasiFiltresi);
+
+            if (zilSaatleriKonum == null || zilSaatleriKonum == "")
+                return;
+
+            Excel excel = new Excel(zilSaatleriKonum);
+            excel.Read(out tenefüsSaatler,out tenefüsSüreler);
+
             PZT.Items.Clear();
             SAL.Items.Clear();
             CAR.Items.Clear();
@@ -132,17 +144,6 @@ namespace Zil
                 if (tenefüsSaatler[6, i] == null || tenefüsSaatler[6, i] == "") continue;
                 PZR.Items.Add(tenefüsSaatler[6, i]);
             }
-        }
-        private void zsButton_Click(object sender, EventArgs e)
-        {
-            zilSaatleriKonum = openFile(zsTextBox, "Zil Saatleri Dosyası", excelDosyasiFiltresi);
-
-            if (zilSaatleriKonum == null || zilSaatleriKonum == "")
-                return;
-
-            Excel excel = new Excel(zilSaatleriKonum);
-            excel.Read(out tenefüsSaatler,out tenefüsSüreler);
-
         }
 
         #region zilZamanlayıcıSistem

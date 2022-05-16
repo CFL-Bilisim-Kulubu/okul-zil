@@ -45,7 +45,6 @@ namespace Zil
             this.CUM = new System.Windows.Forms.ListBox();
             this.PER = new System.Windows.Forms.ListBox();
             this.PZR = new System.Windows.Forms.ListBox();
-            this.ZilSaatleriGuncellemeButton = new System.Windows.Forms.Button();
             this.z1oButton = new System.Windows.Forms.Button();
             this.z2Button = new System.Windows.Forms.Button();
             this.zsButton = new System.Windows.Forms.Button();
@@ -197,16 +196,6 @@ namespace Zil
             this.PZR.Size = new System.Drawing.Size(75, 334);
             this.PZR.TabIndex = 19;
             // 
-            // ZilSaatleriGuncellemeButton
-            // 
-            this.ZilSaatleriGuncellemeButton.Location = new System.Drawing.Point(495, 170);
-            this.ZilSaatleriGuncellemeButton.Name = "ZilSaatleriGuncellemeButton";
-            this.ZilSaatleriGuncellemeButton.Size = new System.Drawing.Size(75, 44);
-            this.ZilSaatleriGuncellemeButton.TabIndex = 20;
-            this.ZilSaatleriGuncellemeButton.Text = "Güncelle";
-            this.ZilSaatleriGuncellemeButton.UseVisualStyleBackColor = true;
-            this.ZilSaatleriGuncellemeButton.Click += new System.EventHandler(this.ZilSaatleriGuncellemeButton_Click);
-            // 
             // z1oButton
             // 
             this.z1oButton.Location = new System.Drawing.Point(495, 17);
@@ -231,7 +220,7 @@ namespace Zil
             // 
             this.zsButton.Location = new System.Drawing.Point(333, 170);
             this.zsButton.Name = "zsButton";
-            this.zsButton.Size = new System.Drawing.Size(156, 44);
+            this.zsButton.Size = new System.Drawing.Size(237, 44);
             this.zsButton.TabIndex = 23;
             this.zsButton.Text = "Zil Saatleri Dosyası";
             this.zsButton.UseVisualStyleBackColor = true;
@@ -266,7 +255,6 @@ namespace Zil
             this.Controls.Add(this.zsButton);
             this.Controls.Add(this.z2Button);
             this.Controls.Add(this.z1oButton);
-            this.Controls.Add(this.ZilSaatleriGuncellemeButton);
             this.Controls.Add(this.PZR);
             this.Controls.Add(this.CMT);
             this.Controls.Add(this.CUM);
@@ -307,7 +295,6 @@ namespace Zil
         private System.Windows.Forms.ListBox CUM;
         private System.Windows.Forms.ListBox PER;
         private System.Windows.Forms.ListBox PZR;
-        private System.Windows.Forms.Button ZilSaatleriGuncellemeButton;
         private System.Windows.Forms.Button z1oButton;
         private System.Windows.Forms.Button z2Button;
         private System.Windows.Forms.Button zsButton;
